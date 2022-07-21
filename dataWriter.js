@@ -1,16 +1,16 @@
 const { Client, Databases } = require("node-appwrite");
 const fs = require("fs");
 const movies = require("./movies.json");
+const dotenv = require('dotenv');
 
 // Init SDK
 let client = new Client();
+dotenv.config();
 
 client
-  .setEndpoint("http://localhost/v1") // Your API Endpoint
-  .setProject("62d6cfec7e3d84860d11") // Your project ID
-  .setKey(
-    "dee0866241292bbaef0a71b95e448b0f2c6237afdced3c588026f97ad639a49477252c4cb794289806268744abd6e7da3698c942ac0cd1fc786f8f8af534053e1dfde6d2b1e02df92e8ac663d4e0ae0897af53626759d55962f347046189fcc71165f570afd4fb1778d17a36f0d72b02f9ada5bf2323f57d557d1daeb3dcbff8"
-  ) // Your secret API key
+  .setEndpoint(process.env.APPWRITE_ENDPOINT) // Your API Endpoint
+  .setProject(process.env.APPWRITE_PROJECTID) // Your project ID
+  .setKey(process.env.APPWRITE_KEY) // Your secret API key
   .setSelfSigned(); // Use only on dev mode with a self-signed SSL cert
 
 let databases = new Databases(client, "62d6d081c21d9cc665e7");
