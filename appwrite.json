@@ -1,0 +1,79 @@
+{
+    "projectId": "meili-example",
+    "projectName": "Meili Example",
+    "collections": [
+        {
+            "$id": "movies-collection",
+            "$createdAt": 1658349162,
+            "$updatedAt": 1658349491,
+            "$read": [
+                "role:all"
+            ],
+            "$write": [],
+            "databaseId": "movies-db",
+            "name": "movies",
+            "enabled": true,
+            "permission": "collection",
+            "attributes": [
+                {
+                    "key": "title",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 2048,
+                    "default": null
+                },
+                {
+                    "key": "id",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                },
+                {
+                    "key": "overview",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 2048,
+                    "default": null
+                },
+                {
+                    "key": "genres",
+                    "type": "string",
+                    "status": "available",
+                    "required": false,
+                    "array": false,
+                    "size": 255,
+                    "default": null
+                }
+            ],
+            "indexes": []
+        }
+    ],
+    "functions": [
+        {
+            "$id": "add-to-meilisearch",
+            "name": "add-to-meilisearch",
+            "runtime": "node-16.0",
+            "path": "functions/add-to-meilisearch",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "role:all"
+            ],
+            "events": [
+                "databases.*.collections.*.documents.*.update"
+            ],
+            "schedule": "",
+            "timeout": 15
+        }
+    ]
+}

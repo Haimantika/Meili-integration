@@ -13,11 +13,11 @@ client
   .setKey(process.env.APPWRITE_KEY) // Your secret API key
   .setSelfSigned(); // Use only on dev mode with a self-signed SSL cert
 
-let databases = new Databases(client, "62d6d081c21d9cc665e7");
+let databases = new Databases(client, "movies-db");
 
 //let promise = database.getDocument('627e9b5e008ffd8382ff', '6283ccb7773a9474319d')
 const promises = movies.map((movie) =>
-  databases.createDocument("62d704e49589a492971a", String(Math.random()), {
+  databases.createDocument("movies-collection", String(Math.random()), {
     title: String(movie.title || Math.random()),
     id: String(movie.id || Math.random()),
     overview: String(movie.overview || Math.random()),
@@ -27,7 +27,7 @@ const promises = movies.map((movie) =>
 
 Promise.all(promises).then(
   function (response) {
-    console.log("auccess", response); // Success
+    console.log("success", response); // Success
   },
   function (error) {
     console.log("fail", error); // Failure
