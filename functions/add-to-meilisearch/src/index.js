@@ -15,7 +15,7 @@ const sdk = require("node-appwrite");
 
 module.exports = async function (req, res) {
 
-  console.log(JSON.stringify(req.payload))
+  console.log(JSON.stringify(req.env))
   const client = new sdk.Client();
 
   // You can remove services you don't use

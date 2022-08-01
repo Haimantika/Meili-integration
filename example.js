@@ -25,13 +25,12 @@ const fetcher = async () => {
 const client = new MeiliSearch({ host: 'http://127.0.0.1:7700' })
 fetcher().then(()=>{
  console.log("mymovies",movies)
- client.index('anotherindex').addDocuments(movies).then((res) => console.log("writesuccess",res))
-
+ client.index('movie').addDocuments(movies);
 })
 
 setTimeout(() => {
-  client.getTasks({ indexUid: ['anotherindex'] }).then((res) => console.log("writesuccess",res.results[0].details))
-  client.index("anotherindex").search("Star Wars").then(res => console.log("search",res))
+  client.getTasks({ indexUid: ['movie'] })
+  client.index("movie").search("Star Wars")
 }, 5000);
 
 

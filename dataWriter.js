@@ -16,20 +16,20 @@ client
 let databases = new Databases(client, "movies-db");
 
 //let promise = database.getDocument('627e9b5e008ffd8382ff', '6283ccb7773a9474319d')
-const promises = movies.map((movie) =>
-  databases.createDocument("movies-collection", String(Math.random()), {
-    title: String(movie.title || Math.random()),
-    id: String(movie.id || Math.random()),
-    overview: String(movie.overview || Math.random()),
-    genres: String(movie.genres || Math.random()),
-  })
-);
+// Run this until you are happy with the number of documents
+const movieWrite = async () => {
+  console.log('starting addition of documents to db')
 
-Promise.all(promises).then(
-  function (response) {
-    console.log("success", response); // Success
-  },
-  function (error) {
-    console.log("fail", error); // Failure
+  for (const movie of movies) {
+    const response = await databases.createDocument("movies-collection", String(Math.random()), {
+      title: String(movie.title || Math.random()),
+      id: String(movie.id || Math.random()),
+      overview: String(movie.overview || Math.random()),
+      genres: String(movie.genres || Math.random()),
+    })
+    console.log(`Added ${movie.title}`, response);
+    await new Promise(resolve => setTimeout(resolve, 100));
   }
-);
+}
+
+movieWrite();
