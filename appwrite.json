@@ -54,5 +54,26 @@
             ],
             "indexes": []
         }
+    ],
+    "functions": [
+        {
+            "$id": "add-to-meilisearch",
+            "name": "add-to-meilisearch",
+            "runtime": "node-16.0",
+            "path": "functions/add-to-meilisearch",
+            "entrypoint": "src/index.js",
+            "ignore": [
+                "node_modules",
+                ".npm"
+            ],
+            "execute": [
+                "role:all"
+            ],
+            "events": [
+                "databases.*.collections.*.documents.*.update"
+            ],
+            "schedule": "",
+            "timeout": 15
+        }
     ]
 }
