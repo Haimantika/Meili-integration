@@ -10,14 +10,15 @@
       <div id="hits"></div>
     </div>
   </body>
-  <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch@0.3.2/dist/instant-meilisearch.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@meilisearch/instant-meilisearch@0.8.1/dist/instant-meilisearch.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4"></script>
   <script>
     const search = instantsearch({
-      indexName: "anotherindex",
+      indexName: "movie",
       searchClient: instantMeiliSearch(
-        "http://localhost:7700"
-      )
+        "http://206.189.206.205",
+        "3ca53aec3885eb48b4d430607dabc5515ea10e4d025319a94eccb6f8d6931823"
+      ) 
       });
       search.addWidgets([
         instantsearch.widgets.searchBox({
