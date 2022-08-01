@@ -10,7 +10,7 @@ let Appwriteclient = new Client();
 dotenv.config();
 
 Appwriteclient
-  .setEndpoint(process.env.AAPPWRITE_ENDPOINT) // Your API Endpoint
+  .setEndpoint(process.env.APPWRITE_ENDPOINT) // Your API Endpoint
   .setProject(process.env.APPWRITE_PROJECTID) // Your project ID
   .setKey(process.env.APPWRITE_KEY) // Your secret API key
   .setSelfSigned(); // Use only on dev mode with a self-signed SSL cert
@@ -22,7 +22,7 @@ const fetcher = async () => {
   const response = await databases.listDocuments('movies-collection', [], 100);
   movies = response.documents
 }
-const client = new MeiliSearch({ host: 'http://127.0.0.1:7700',apiKey: 'MASTER_KEY' })
+const client = new MeiliSearch({ host: 'http://127.0.0.1:7700' })
 fetcher().then(()=>{
  console.log("mymovies",movies)
  client.index('anotherindex').addDocuments(movies).then((res) => console.log("writesuccess",res))
