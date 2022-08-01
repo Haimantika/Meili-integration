@@ -1,5 +1,5 @@
 const sdk = require("node-appwrite");
-
+const { MeiliSearch } = require('meilisearch')
 /*
   'req' variable has:
     'headers' - object with request headers
@@ -31,9 +31,12 @@ module.exports = async function (req, res) {
 
   if (
     !req.env['APPWRITE_FUNCTION_ENDPOINT'] ||
-    !req.env['APPWRITE_FUNCTION_API_KEY']
+    !req.env['APPWRITE_FUNCTION_API_KEY'] ||
+    !req.env['APPWRITE_MEILISEARCH_HOST'] ||
+    !req.env['APPWRITE_MEILISEARCH_API_KEY']
+
   ) {
-    console.warn("Environment variables are not set. Function cannot use Appwrite SDK.");
+    throw "Environment variables are not set. Function cannot use Appwrite SDK.";
   } else {
     client
       .setEndpoint(req.env['APPWRITE_FUNCTION_ENDPOINT'])
@@ -42,8 +45,21 @@ module.exports = async function (req, res) {
       .setSelfSigned(true);
   }
 
-  res.json({
-    payload: req.payload,
-    headers: req.headers
-  });
+  if (
+    !req.env['APPWRITE_FUNCTION_EVENT_DATA']
+  ) {
+    throw "Missing event data!";
+  }
+
+  const meiliConfig = {
+    host: req.env['APPWRITE_MEILISEARCH_HOST'],
+    apiKey: req.env['APPWRITE_MEILISEARCH_API_KEY']
+  }
+
+  const meiliClient = new MeiliSearch(meiliConfig);
+  const data = JSON.parse(req.env['APPWRITE_FUNCTION_EVENT_DATA']);
+  const result = await meiliClient.index('movie').updateDocuments(data);
+  console.log(result);
+
+  res.json(data, 200);
 };
