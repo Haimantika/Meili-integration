@@ -17,12 +17,12 @@ Appwriteclient
 
 
 
-let databases = new Databases(Appwriteclient, "62d6d081c21d9cc665e7");
+let databases = new Databases(Appwriteclient, "movies-db");
 const fetcher = async () => {
-  const response = await databases.listDocuments('62d704e49589a492971a', [], 100);
+  const response = await databases.listDocuments('movies-collection', [], 100);
   movies = response.documents
 }
-const client = new MeiliSearch({ host: 'http://127.0.0.1:7700',apiKey: 'masterKey' })
+const client = new MeiliSearch({ host: 'http://127.0.0.1:7700',apiKey: 'MASTER_KEY' })
 fetcher().then(()=>{
  console.log("mymovies",movies)
  client.index('anotherindex').addDocuments(movies).then((res) => console.log("writesuccess",res))
