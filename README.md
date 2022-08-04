@@ -25,7 +25,7 @@ A simple search application using Appwrite and Meilisearch.
 
 - Once everything is up and running, type `node dataWriter.js` and see the magic happening in [http://localhost:7700](http://localhost:7700)
 
-- Follow the detailed steps in this [blog](blog link)
+- Follow the detailed steps in this [blog](https://dev.to/appwrite/building-an-open-source-search-engine-with-appwrite-and-meilisearch-40kn)
 
 # Resources 📚
 
