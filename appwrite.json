@@ -70,7 +70,8 @@
                 "role:all"
             ],
             "events": [
-                "databases.*.collections.*.documents.*.update"
+                "databases.*.collections.*.documents.*.update",
+                "databases.*.collections.*.documents.*.create"
             ],
             "schedule": "",
             "timeout": 15
